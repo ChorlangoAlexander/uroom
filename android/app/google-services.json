@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "746480877322",
+    "project_id": "u-room-2ec19",
+    "storage_bucket": "u-room-2ec19.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:746480877322:android:2f052569a7d161677f84f3",
+        "android_client_info": {
+          "package_name": "com.example.uroom"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "746480877322-u7digkbqs6kcsa3otnlkgc2t9025rf8c.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.uroom",
+            "certificate_hash": "09688bc33ce97f8f343bf9e2194ae5c4af2eca93"
+          }
+        },
+        {
+          "client_id": "746480877322-c5toq02tci3lhn5fheke9u6ppkn9m46g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC9fM1mZhOpXiCNUECqhosYM8BJEm04lW8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "746480877322-c5toq02tci3lhn5fheke9u6ppkn9m46g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
