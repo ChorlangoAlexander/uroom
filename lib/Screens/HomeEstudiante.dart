@@ -20,6 +20,10 @@ class _HomeEstudianteState extends State<HomeEstudiante> {
   _HomeEstudianteState({required this.id});
   @override
   void initState() {
+    crudMethods.getData().then((result) {
+      blogSnapshot = result;
+      setState(() {});
+    });
     super.initState();
     FirebaseFirestore.instance
         .collection("users") //.where('uid', isEqualTo: user!.uid)
@@ -152,9 +156,5 @@ class BlogTile extends StatelessWidget {
         ],
       ),
     );
-  }
-
-  Widget _swiper() {
-    return Container();
   }
 }

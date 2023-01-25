@@ -20,6 +20,10 @@ class _HomeAnfitrionState extends State<HomeAnfitrion> {
   _HomeAnfitrionState({required this.id});
   @override
   void initState() {
+    crudMethods.getData().then((result) {
+      blogSnapshot = result;
+      setState(() {});
+    });
     super.initState();
     FirebaseFirestore.instance
         .collection("users") //.where('uid', isEqualTo: user!.uid)
@@ -40,8 +44,6 @@ class _HomeAnfitrionState extends State<HomeAnfitrion> {
   CrudMethods crudMethods = new CrudMethods();
 
   QuerySnapshot? blogSnapshot;
-
-  @override
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -144,9 +146,5 @@ class BlogTile extends StatelessWidget {
         ],
       ),
     );
-  }
-
-  Widget _swiper() {
-    return Container();
   }
 }

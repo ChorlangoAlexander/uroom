@@ -32,8 +32,15 @@ class _controState extends State<contro> {
   var rooll;
   var emaill;
   var id;
+  CrudMethods crudMethods = new CrudMethods();
+
+  QuerySnapshot? blogSnapshot;
   @override
   void initState() {
+    crudMethods.getData().then((result) {
+      blogSnapshot = result;
+      setState(() {});
+    });
     super.initState();
     FirebaseFirestore.instance
         .collection("users") //.where('uid', isEqualTo: user!.uid)

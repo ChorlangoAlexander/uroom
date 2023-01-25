@@ -43,7 +43,7 @@ class _BNavigattorState extends State<BNavigattor> {
           items: [
             Icon(Icons.home, size: 30, color: Colors.white),
             Icon(Icons.messenger_rounded, size: 30, color: Colors.white),
-            Icon(Icons.notifications, size: 30, color: Colors.white),
+            Icon(Icons.search, size: 30, color: Colors.white),
             Icon(Icons.person, size: 30, color: Colors.white),
           ],
         ),
