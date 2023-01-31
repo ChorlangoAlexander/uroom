@@ -49,7 +49,7 @@ class _controState extends State<contro> {
         .then((value) {
       this.loggedInUser = UserModel.fromMap(value.data());
     }).whenComplete(() {
-      CircularProgressIndicator();
+      //CircularProgressIndicator();
       setState(() {
         emaill = loggedInUser.email.toString();
         rooll = loggedInUser.roll.toString();

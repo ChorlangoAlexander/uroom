@@ -59,7 +59,7 @@ class CrudMethods {
   Future<void> addData(blogData) async {
     print(blogData);
     FirebaseFirestore.instance
-        .collection("blogs")
+        .collection("post")
         .add(blogData)
         .then((value) => print(value))
         .catchError((e) {
@@ -68,6 +68,6 @@ class CrudMethods {
   }
 
   getData() async {
-    return await FirebaseFirestore.instance.collection("blogs").get();
+    return await FirebaseFirestore.instance.collection("post ").get();
   }
 }

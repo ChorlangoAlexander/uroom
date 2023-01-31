@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:uroom/Screens/Perfil.dart';
+import 'package:uroom/Utils/NavBarAmfitrion.dart';
+import 'package:uroom/Utils/NavBarEstudiante.dart';
 import 'package:uroom/model/modelo.dart';
 
 class NavBar extends StatefulWidget {
@@ -14,97 +16,59 @@ class NavBar extends StatefulWidget {
 }
 
 class _NavBarState extends State<NavBar> {
-  User? user = FirebaseAuth.instance.currentUser;
-  UserModel usuarioLogeado = UserModel();
-  UserModel foto = UserModel();
+  @override
+  Widget build(BuildContext context) {
+    return controNav();
+  }
+}
 
+class controNav extends StatefulWidget {
+  // const controNav({super.key});
+  controNav();
+
+  @override
+  State<controNav> createState() => _controNavState();
+}
+
+class _controNavState extends State<controNav> {
+  User? user = FirebaseAuth.instance.currentUser;
+  UserModel loggedInUser = UserModel();
+  var rooll;
+  var emaill;
+  var id;
+  CrudMethods crudMethods = new CrudMethods();
+
+  QuerySnapshot? blogSnapshot;
+  @override
   void initState() {
     super.initState();
     FirebaseFirestore.instance
-        .collection('users')
+        .collection("users") //.where('uid', isEqualTo: user!.uid)
         .doc(user!.uid)
         .get()
         .then((value) {
-      this.usuarioLogeado = UserModel.fromMap(value.data());
-      setState(() {});
-      FirebaseFirestore.instance.collection('users').doc(user!.photoURL);
+      this.loggedInUser = UserModel.fromMap(value.data());
+    }).whenComplete(() {
+      CircularProgressIndicator();
+      setState(() {
+        emaill = loggedInUser.email.toString();
+        rooll = loggedInUser.roll.toString();
+        id = loggedInUser.nombres.toString();
+      });
     });
+  }
+
+//ruta para pantallas de home
+  routing() {
+    if (rooll == 'Estudiante') {
+      return NavBarEstudiantes(navEstudiante: id);
+    } else {
+      return NavBarAmfitrion(navAmfitrion: id);
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    User? user = FirebaseAuth.instance.currentUser;
-    return Drawer(
-      child: ListView(
-        padding: EdgeInsets.zero,
-        children: [
-          UserAccountsDrawerHeader(
-            margin: EdgeInsets.all(0),
-            accountName: Text(
-              '${usuarioLogeado.nombres} ${usuarioLogeado.apellidos}',
-              style: TextStyle(color: Colors.red),
-            ),
-            accountEmail: Text(
-              '${usuarioLogeado.email}',
-              style: TextStyle(color: Colors.red),
-            ),
-            currentAccountPicture: CircleAvatar(
-              child: ClipOval(
-                child: Image.network(
-                  // user.photoURL!,
-                  'https://static.vecteezy.com/system/resources/previews/005/005/788/original/user-icon-in-trendy-flat-style-isolated-on-grey-background-user-symbol-for-your-web-site-design-logo-app-ui-illustration-eps10-free-vector.jpg',
-                  width: 90,
-                  height: 90,
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
-            decoration: BoxDecoration(
-
-                //color: Colors.red,
-
-                image: DecorationImage(
-              image: AssetImage(
-                'assets/2.jpeg',
-                //'https://media.istockphoto.com/photos/travel-planning-background-picture-id1309040743?b=1&k=20&m=1309040743&s=170667a&w=0&h=eyIzT1oSW2B5gPMPqgybEseIYIUrY96cxPTE_B0ewVs=',
-              ),
-            )),
-          ),
-          ListTile(
-            leading: Icon(Icons.person),
-            title: Text('Perfil'),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => PerfilScreen()),
-              );
-            },
-          ),
-          ListTile(
-            leading: Icon(Icons.search),
-            title: Text('Busqueda'),
-            onTap: () {},
-          ),
-          ListTile(
-            leading: Icon(Icons.savings_rounded),
-            title: Text('Guardados'),
-            onTap: () {},
-          ),
-          ListTile(
-              leading: Icon(Icons.favorite),
-              title: Text('Favoritos'),
-              onTap: () {
-                ListTile(
-                  leading: Icon(Icons.logout),
-                  title: Text('Salir'),
-                  onTap: () {
-                    // Navigator.push(context,
-                    //     MaterialPageRoute(builder: (context) => LoginScreen()));
-                  },
-                );
-              })
-        ],
-      ),
-    );
+    return routing();
   }
 }

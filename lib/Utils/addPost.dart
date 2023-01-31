@@ -86,18 +86,14 @@ class _AddBlogState extends State<AddBlog> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          uploadBlog();
+        },
+        child: Icon(Icons.add_a_photo),
+      ),
       appBar: AppBar(
         flexibleSpace: Container(),
-        actions: [
-          GestureDetector(
-            onTap: () {
-              uploadBlog();
-            },
-            child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16),
-                child: Icon(Icons.file_upload)),
-          )
-        ],
       ),
       body: isLoading
           ? Container(
